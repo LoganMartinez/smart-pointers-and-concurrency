@@ -23,7 +23,7 @@ fn main() {
       }
     }
 
-    // one thread -- 45 seconds
+    // one thread -- 44 seconds
     if !multi {
       let now = Instant::now();
       let res = single_thread_solve_with_file(&0, &n);
@@ -37,7 +37,7 @@ fn main() {
     }
 
 
-    // multiple threads -- 51 seconds
+    // multiple threads -- 47 seconds
     if multi {
       let num_threads = 8;
       let (tx, rx) = mpsc::channel::<f64>();
@@ -103,7 +103,8 @@ fn single_thread_solve_with_file(start_line: &i32, end_line: &i32) -> std::io::R
     }
     if start_reading {
       let f: f64 = line?.parse().unwrap();
-      sum += f;
+      let sqrt = f.sqrt();
+      sum += sqrt;
     }
   }
   Ok(sum)
